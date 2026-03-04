@@ -73,7 +73,7 @@
                         {{/if}}
 
                         <section class="gh-about-wrapper">
-                            <h3 class="gh-about-title">{{@site.title}}</h3>
+                            <h3 class="gh-about-title">{{#if @custom.newsletter_name}}{{@custom.newsletter_name}}{{else}}{{@site.title}}{{/if}}</h3>
 
                             {{#if @site.description}}
                                 <p class="gh-about-description">{{@site.description}}</p>
