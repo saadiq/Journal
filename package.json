@@ -72,6 +72,10 @@
             "hero_cta_url": {
                 "type": "text",
                 "default": "https://cal.com/saadiq/30min"
+            },
+            "newsletter_name": {
+                "type": "text",
+                "default": ""
             }
         }
     },
