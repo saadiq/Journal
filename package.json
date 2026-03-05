@@ -1,6 +1,6 @@
 {
-    "name": "journal",
-    "description": "A Ghost theme",
+    "name": "journal-dark",
+    "description": "Expert's Desk dark theme for Ghost",
     "version": "1.0.0",
     "private": true,
     "engines": {

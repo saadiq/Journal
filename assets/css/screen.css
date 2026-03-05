@@ -1,11 +1,8 @@
 @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
 @import "fonts.css";
+@import "dark-theme.css";
 
 :root {
-    --font-sans: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif; /* stylelint-disable-line value-keyword-case */
-    --font-serif: Lora, Times, serif; /* stylelint-disable-line value-keyword-case */
-    --color-primary-text: var(--color-black);
-    --color-darker-gray: var(--color-black);
     --head-nav-gap: 3.2rem;
 }
 
@@ -25,15 +22,18 @@
 /* Hero */
 
 .gh-hero {
-    max-width: 720px;
+    max-width: 900px;
     margin-top: 4rem;
+    margin-right: auto;
     margin-bottom: 8rem;
+    margin-left: auto;
     padding-bottom: 8rem;
+    text-align: center;
     border-bottom: 1px solid var(--color-light-gray);
 }
 
 .gh-hero-heading {
-    font-size: clamp(3.6rem, 5vw, 5.4rem);
+    font-size: clamp(3.6rem, 5.6vw, 5.8rem);
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -46,6 +46,8 @@
 .gh-hero-description {
     max-width: 600px;
     margin-top: 2rem;
+    margin-right: auto;
+    margin-left: auto;
     font-size: 2rem;
     line-height: 1.5;
     color: var(--color-secondary-text);
@@ -56,12 +58,22 @@
 }
 
 .gh-latest {
+    max-width: 720px;
     margin-top: 4rem;
-    margin-bottom: 12rem;
+    margin-bottom: 8rem;
 }
 
 .gh-latest .gh-card-meta {
     margin-top: 2.4rem;
+}
+
+.gh-latest .gh-article-title {
+    font-size: 2.8rem;
+    letter-spacing: -0.02em;
+}
+
+.gh-latest .gh-article-excerpt {
+    font-size: 1.8rem;
 }
 
 .gh-wrapper {
@@ -615,7 +627,11 @@
     }
 
     .gh-latest {
-        margin-bottom: 8rem;
+        margin-bottom: 6.4rem;
+    }
+
+    .gh-latest .gh-article-title {
+        font-size: 2.4rem;
     }
 
     .gh-wrapper {
@@ -702,3 +718,4 @@
         top: 1px;
     }
 }
+

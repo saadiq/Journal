@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title}}</title>
     <link rel="stylesheet" href="{{asset "built/screen.css"}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     {{ghost_head}}
 </head>
@@ -30,6 +33,7 @@
             </div>
 
             <nav class="gh-head-menu">
+                <a class="gh-head-site-link" href="https://saadiq.xyz">&larr; saadiq.xyz</a>
                 {{navigation}}
                 {{#unless @site.members_enabled}}
                     {{#match @custom.navigation_layout "Stacked"}}

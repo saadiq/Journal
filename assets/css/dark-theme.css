@@ -1,0 +1,494 @@
+/* Expert's Desk Dark Theme Overrides
+/* ---------------------------------------------------------- */
+
+/* Override all base color custom properties for dark mode */
+:root {
+    /* Core palette */
+    --ghost-accent-color: #d4a843 !important;
+    --color-primary-text: #f0ece4;
+    --color-secondary-text: #8a8578;
+    --color-white: #0c0c0c;
+    --color-lighter-gray: #1a1a1a;
+    --color-light-gray: #2a2a2a;
+    --color-mid-gray: #3a3a3a;
+    --color-dark-gray: #8a8578;
+    --color-darker-gray: #f0ece4;
+    --color-black: #f0ece4;
+
+    /* Font overrides */
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+    --font-serif: "Instrument Serif", Georgia, serif;
+    --font-mono: "JetBrains Mono", Menlo, Consolas, Monaco, monospace;
+
+    /* Theme-specific tokens */
+    --color-bg: #0c0c0c;
+    --color-bg-surface: #141414;
+    --color-text: #f0ece4;
+    --color-text-muted: #8a8578;
+    --color-accent: #d4a843;
+    --color-accent-hover: #e8bd5a;
+    --color-rule: #2a2a2a;
+}
+
+/* Body and HTML */
+html {
+    background-color: #0c0c0c;
+}
+
+body {
+    color: #f0ece4;
+    background-color: #0c0c0c;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Links */
+a {
+    color: #f0ece4;
+}
+
+a:hover {
+    color: #d4a843;
+    opacity: 1;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #f0ece4;
+}
+
+/* Header */
+.gh-head {
+    background-color: #0c0c0c;
+}
+
+.gh-head-logo {
+    color: #f0ece4;
+}
+
+.gh-head .nav a {
+    color: #f0ece4;
+}
+
+.gh-head .nav a:hover {
+    color: #d4a843;
+}
+
+.gh-head-link {
+    color: #f0ece4 !important;
+}
+
+.gh-search {
+    color: #f0ece4;
+}
+
+.gh-burger::before,
+.gh-burger::after {
+    background-color: #f0ece4;
+}
+
+/* Stacked header menu borders */
+.is-head-stacked .gh-head-menu::before,
+.is-head-stacked .gh-head-menu::after {
+    background-color: #2a2a2a;
+}
+
+/* Back to site link in nav */
+.gh-head-site-link {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    color: #8a8578 !important;
+    text-transform: none;
+}
+
+.gh-head-site-link:hover {
+    color: #d4a843 !important;
+}
+
+/* Primary button (subscribe, CTA) */
+.gh-primary-btn {
+    color: #0c0c0c;
+    background-color: #d4a843;
+}
+
+.gh-primary-btn:hover {
+    background-color: #e8bd5a;
+    opacity: 1;
+}
+
+/* Default button */
+.gh-btn {
+    color: #f0ece4;
+    background-color: #141414;
+}
+
+/* Outline button */
+.gh-outline-btn {
+    color: #f0ece4;
+    border-color: #2a2a2a;
+}
+
+.gh-outline-btn:hover {
+    border-color: #3a3a3a;
+}
+
+/* Hero section */
+.gh-hero {
+    border-bottom-color: #2a2a2a;
+}
+
+.gh-hero-heading {
+    font-family: var(--font-serif);
+    color: #f0ece4;
+}
+
+.gh-hero-description {
+    color: #8a8578;
+}
+
+.gh-hero-cta {
+    color: #0c0c0c;
+    background-color: #d4a843;
+}
+
+.gh-hero-cta:hover {
+    background-color: #e8bd5a;
+    opacity: 1;
+}
+
+/* Section titles (labels) */
+.gh-section-title {
+    font-family: var(--font-mono);
+    color: #d4a843;
+    letter-spacing: 0.05em;
+}
+
+.gh-section-title::after {
+    background-color: #2a2a2a;
+}
+
+/* Cards */
+.gh-card-title {
+    color: #f0ece4;
+}
+
+.gh-card-link:hover .gh-card-title {
+    color: #d4a843;
+    opacity: 1;
+}
+
+.gh-card-meta {
+    font-family: var(--font-mono);
+    color: #8a8578;
+}
+
+.gh-card-date {
+    color: #d4a843;
+}
+
+.gh-card-excerpt {
+    color: #8a8578;
+}
+
+/* Load more button */
+.gh-loadmore {
+    color: #f0ece4;
+    background-color: transparent;
+    border-color: #2a2a2a;
+}
+
+.gh-loadmore:hover {
+    border-color: #d4a843;
+    color: #d4a843;
+}
+
+/* Sidebar */
+.gh-sidebar {
+    border-left-color: #2a2a2a;
+}
+
+.gh-about-title {
+    color: #f0ece4;
+}
+
+.gh-about-description {
+    color: #8a8578;
+}
+
+/* Topic items */
+.gh-topic-name {
+    color: #f0ece4;
+}
+
+.gh-topic-count {
+    color: #8a8578;
+    border-color: #2a2a2a;
+}
+
+.gh-topic-item:hover .gh-topic-name {
+    color: #d4a843;
+}
+
+/* Subscribe section */
+.gh-subscribe {
+    background-color: #141414;
+}
+
+.gh-subscribe-title {
+    color: #f0ece4;
+}
+
+.gh-subscribe-description {
+    color: #8a8578;
+}
+
+.gh-subscribe-input {
+    color: #8a8578;
+    background-color: #0c0c0c;
+    border-color: #2a2a2a;
+}
+
+.gh-subscribe .gh-subscribe-input {
+    border: 1px solid #2a2a2a;
+}
+
+.gh-subscribe-input:hover {
+    border-color: #3a3a3a;
+}
+
+.gh-subscribe-input-btn {
+    color: #d4a843;
+}
+
+.gh-subscribe-btn {
+    color: #0c0c0c;
+    background-color: #d4a843;
+}
+
+/* Signup */
+.gh-signup-description {
+    color: #8a8578;
+}
+
+/* Article / Post page */
+.gh-article-meta {
+    font-family: var(--font-mono);
+    color: #8a8578;
+}
+
+.gh-article-meta a {
+    color: #d4a843;
+}
+
+.gh-article-tag {
+    color: #d4a843 !important;
+}
+
+.gh-article-title {
+    font-family: var(--font-serif);
+    color: #f0ece4;
+}
+
+.gh-article-excerpt {
+    color: #8a8578;
+}
+
+.gh-article-footer {
+    border-top-color: #2a2a2a;
+}
+
+/* Content area */
+.gh-content a {
+    color: #d4a843;
+}
+
+.gh-content a:hover {
+    color: #e8bd5a;
+}
+
+/* Code blocks */
+pre {
+    background-color: #141414;
+    border: 1px solid #2a2a2a;
+}
+
+code {
+    font-family: var(--font-mono);
+}
+
+:not(pre) > code {
+    color: #d4a843;
+    background-color: #1a1a1a;
+}
+
+/* Tables */
+.gh-content table:not(.gist table) th {
+    color: #f0ece4;
+    background-color: #141414;
+}
+
+.gh-content table:not(.gist table) th,
+.gh-content table:not(.gist table) td {
+    border-color: #2a2a2a;
+}
+
+.gh-content table:not(.gist table) td:first-child {
+    background-image: linear-gradient(to right, #0c0c0c 50%, rgba(12, 12, 12, 0) 100%);
+}
+
+.gh-content table:not(.gist table) td:last-child {
+    background-image: linear-gradient(to left, #0c0c0c 50%, rgba(12, 12, 12, 0) 100%);
+}
+
+/* HR */
+hr {
+    background-color: #2a2a2a;
+}
+
+/* Blockquote */
+blockquote:not([class]) {
+    border-left-color: #d4a843;
+}
+
+/* Figcaption */
+figcaption {
+    color: #8a8578;
+}
+
+/* Navigation (prev/next) */
+.gh-navigation-label {
+    color: #8a8578;
+}
+
+.gh-navigation-title {
+    color: #f0ece4;
+}
+
+.gh-navigation-link:hover .gh-navigation-title {
+    color: #d4a843;
+}
+
+/* Footer */
+.gh-foot {
+    color: #8a8578;
+    background-color: #0c0c0c;
+    border-top: 1px solid #2a2a2a;
+}
+
+.gh-foot a {
+    color: #8a8578;
+}
+
+.gh-foot a:hover {
+    color: #d4a843;
+}
+
+.gh-copyright {
+    color: #8a8578;
+}
+
+/* CTA gradient (paywalled content) */
+.gh-cta-gradient {
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0), #0c0c0c);
+}
+
+.gh-cta-link {
+    color: #8a8578;
+}
+
+.gh-cta-link:hover {
+    color: #d4a843;
+}
+
+/* Tag label */
+.gh-tag-label {
+    font-family: var(--font-mono);
+    color: #d4a843;
+}
+
+/* Pagehead */
+.gh-pagehead-description {
+    color: #8a8578;
+}
+
+/* Dropdown menu */
+.gh-dropdown {
+    background-color: #141414;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 7px 20px -5px rgba(0, 0, 0, 0.5);
+}
+
+.gh-dropdown li a {
+    color: #f0ece4 !important;
+}
+
+.gh-dropdown li a:hover {
+    color: #d4a843 !important;
+}
+
+/* Mobile menu open state */
+@media (max-width: 767px) {
+    .is-head-open:not(.is-head-brand):not(.is-head-dark):not(.is-head-transparent) #gh-head {
+        background-color: #0c0c0c;
+    }
+
+    .is-head-open #gh-head .gh-head-actions {
+        background-color: #0c0c0c;
+    }
+}
+
+/* Recommendations */
+.gh-recommendations .recommendation-title {
+    color: #f0ece4;
+}
+
+.gh-recommendations .recommendation-url {
+    color: #8a8578;
+}
+
+.gh-recommendations .recommendation-description {
+    color: #8a8578;
+}
+
+.gh-recommendations button {
+    color: #d4a843;
+}
+
+/* Selection color */
+::selection {
+    background: rgba(212, 168, 67, 0.3);
+    color: #f0ece4;
+}
+
+/* Ghost portal / membership cards - dark surfaces */
+.gh-post-upgrade-cta {
+    background-color: #141414 !important;
+    border-color: #2a2a2a !important;
+}
+
+.gh-post-upgrade-cta a {
+    color: #0c0c0c !important;
+    background-color: #d4a843 !important;
+}
+
+/* Bookmark cards */
+.kg-bookmark-container {
+    border-color: #2a2a2a;
+}
+
+.kg-bookmark-content {
+    background-color: #141414;
+}
+
+.kg-bookmark-title {
+    color: #f0ece4;
+}
+
+.kg-bookmark-description {
+    color: #8a8578;
+}
+
+.kg-bookmark-metadata {
+    color: #8a8578;
+}
