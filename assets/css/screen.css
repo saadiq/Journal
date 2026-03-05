@@ -1,13 +1,6 @@
 @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
 @import "fonts.css";
-
-:root {
-    --font-sans: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif; /* stylelint-disable-line value-keyword-case */
-    --font-serif: Lora, Times, serif; /* stylelint-disable-line value-keyword-case */
-    --color-primary-text: var(--color-black);
-    --color-darker-gray: var(--color-black);
-    --head-nav-gap: 3.2rem;
-}
+@import "dark-theme.css";
 
 .tag-template .gh-main,
 .author-template .gh-main {

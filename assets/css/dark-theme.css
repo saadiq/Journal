@@ -1,0 +1,603 @@
+/* ==========================================================================
+   Dark Theme — Expert's Desk Aesthetic
+   Overrides Ghost shared-theme-assets CSS custom properties and applies
+   dark mode styling throughout.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Custom Property Overrides
+   Invert the Ghost color scale so "white" becomes dark and "black" becomes light.
+   -------------------------------------------------------------------------- */
+
+:root {
+    /* Color scale — inverted for dark mode */
+    --color-white: #0c0c0c;
+    --color-lighter-gray: #141414;
+    --color-light-gray: #1a1a1a;
+    --color-mid-gray: #8a8578;
+    --color-dark-gray: #c0b9ad;
+    --color-darker-gray: #f0ece4;
+    --color-black: #f0ece4;
+
+    /* Text colors */
+    --color-primary-text: #f0ece4;
+    --color-secondary-text: #8a8578;
+
+    /* Accent */
+    --ghost-accent-color: #d4a843 !important;
+
+    /* Fonts */
+    --font-sans: Inter, system-ui, sans-serif;
+    --font-serif: "Instrument Serif", serif;
+    --font-mono: "JetBrains Mono", monospace;
+
+    /* Nav spacing */
+    --head-nav-gap: 3.2rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. Base Elements
+   -------------------------------------------------------------------------- */
+
+html {
+    background-color: #0c0c0c;
+}
+
+body {
+    color: #f0ece4;
+    background-color: #0c0c0c;
+}
+
+a {
+    color: #f0ece4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #f0ece4;
+}
+
+hr {
+    background-color: #2a2a2a;
+}
+
+::selection {
+    background: rgba(212, 168, 67, 0.3);
+    color: #f0ece4;
+}
+
+/* --------------------------------------------------------------------------
+   3. Header / Navigation
+   -------------------------------------------------------------------------- */
+
+.gh-head {
+    background-color: #0c0c0c;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.gh-head-logo,
+.gh-head-logo a {
+    color: #f0ece4;
+}
+
+.gh-head .nav a {
+    color: #c0b9ad;
+}
+
+.gh-head .nav a:hover {
+    color: #d4a843;
+    opacity: 1;
+}
+
+.gh-head-menu,
+.gh-head-actions {
+    font-family: "JetBrains Mono", monospace;
+}
+
+.gh-head-link {
+    color: #c0b9ad;
+}
+
+.gh-head-link:hover {
+    color: #d4a843;
+    opacity: 1;
+}
+
+.gh-search,
+.gh-social,
+.nav-more-toggle {
+    color: #c0b9ad;
+}
+
+.gh-burger::before,
+.gh-burger::after {
+    background-color: #f0ece4;
+}
+
+/* Back link to saadiq.xyz */
+.gh-head-brand-wrapper {
+    gap: 2rem;
+}
+
+.gh-head-site-link {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.1rem;
+    color: #8a8578;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.gh-head-site-link:hover {
+    color: #d4a843;
+    opacity: 1;
+}
+
+/* Primary button in header */
+.gh-head-btn.gh-btn {
+    color: #0c0c0c;
+    background-color: #d4a843;
+}
+
+.gh-head-btn.gh-btn:hover {
+    background-color: #e8bd5a;
+}
+
+/* Stacked header rules */
+.is-head-stacked .gh-head-menu::before,
+.is-head-stacked .gh-head-menu::after {
+    background-color: #2a2a2a;
+}
+
+/* --------------------------------------------------------------------------
+   4. Dropdown Menu
+   -------------------------------------------------------------------------- */
+
+.gh-dropdown {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.gh-dropdown li a {
+    color: #f0ece4 !important;
+}
+
+.gh-dropdown li a:hover {
+    color: #d4a843 !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Cards / Post Loop
+   -------------------------------------------------------------------------- */
+
+.gh-card-title {
+    color: #f0ece4;
+}
+
+.gh-card-link:hover .gh-card-title {
+    color: #d4a843;
+    opacity: 1;
+}
+
+.gh-card-excerpt {
+    color: #c0b9ad;
+}
+
+.gh-card-meta {
+    color: #8a8578;
+}
+
+.gh-card-date {
+    color: #d4a843;
+}
+
+.gh-card-meta > * + *:not(script)::before {
+    background-color: #8a8578;
+}
+
+/* Section titles with rule line */
+.gh-section-title {
+    color: #8a8578;
+    font-family: "JetBrains Mono", monospace;
+}
+
+.gh-section-title::after {
+    background-color: #2a2a2a;
+}
+
+/* Load more button */
+.gh-loadmore {
+    color: #f0ece4;
+    border-color: #2a2a2a;
+}
+
+.gh-loadmore:hover {
+    border-color: #d4a843;
+    color: #d4a843;
+}
+
+/* --------------------------------------------------------------------------
+   6. Sidebar
+   -------------------------------------------------------------------------- */
+
+.gh-sidebar {
+    border-left: 1px solid #2a2a2a;
+}
+
+.gh-about-title {
+    color: #f0ece4;
+}
+
+.gh-about-description {
+    color: #c0b9ad;
+}
+
+/* Signup in sidebar */
+.gh-signup-description {
+    color: #c0b9ad;
+}
+
+.gh-signup-btn {
+    color: #0c0c0c;
+    background-color: #d4a843;
+}
+
+.gh-signup-btn:hover {
+    background-color: #e8bd5a;
+}
+
+/* Featured posts */
+.gh-featured .gh-card-title {
+    color: #f0ece4;
+}
+
+.gh-featured .gh-card-excerpt {
+    color: #8a8578;
+}
+
+/* Topics */
+.gh-topic-name {
+    color: #f0ece4;
+}
+
+.gh-topic-item:hover .gh-topic-name {
+    color: #d4a843;
+}
+
+.gh-topic-count {
+    color: #8a8578;
+    border-color: #2a2a2a;
+}
+
+/* Recommendations */
+.gh-recommendations .recommendation-title {
+    color: #f0ece4;
+}
+
+.gh-recommendations .recommendation-url {
+    color: #8a8578;
+}
+
+.gh-recommendations button {
+    color: #d4a843;
+}
+
+/* --------------------------------------------------------------------------
+   7. Subscribe / CTA Section
+   -------------------------------------------------------------------------- */
+
+.gh-subscribe {
+    background-color: #141414;
+    border-top: 1px solid #2a2a2a;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.gh-subscribe-title {
+    color: #f0ece4;
+}
+
+.gh-subscribe-description {
+    color: #c0b9ad;
+}
+
+.gh-subscribe-input {
+    color: #8a8578;
+    background-color: #1a1a1a;
+    border-color: #2a2a2a;
+}
+
+.gh-subscribe .gh-subscribe-input {
+    border: 1px solid #2a2a2a;
+}
+
+.gh-subscribe-input:hover {
+    border-color: #d4a843;
+}
+
+.gh-subscribe-input-btn {
+    color: #d4a843;
+}
+
+.gh-subscribe-btn {
+    color: #0c0c0c;
+    background-color: #d4a843;
+}
+
+.gh-subscribe-btn:hover {
+    background-color: #e8bd5a;
+}
+
+/* Sidebar subscribe input */
+.gh-signup .gh-subscribe-input {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+}
+
+/* --------------------------------------------------------------------------
+   8. Article / Post Content
+   -------------------------------------------------------------------------- */
+
+.gh-article-meta {
+    color: #8a8578;
+    font-family: "JetBrains Mono", monospace;
+}
+
+.gh-article-meta a {
+    color: #d4a843;
+}
+
+.gh-article-title {
+    color: #f0ece4;
+}
+
+.gh-article-excerpt {
+    color: #c0b9ad;
+}
+
+.gh-article-footer {
+    border-color: #2a2a2a;
+}
+
+/* Content links */
+.gh-content a {
+    color: #d4a843;
+}
+
+.gh-content a:hover {
+    color: #e8bd5a;
+}
+
+/* Headings in content */
+.gh-content h2,
+.gh-content h3,
+.gh-content h4,
+.gh-content h5,
+.gh-content h6 {
+    color: #f0ece4;
+}
+
+/* Code blocks */
+pre {
+    background-color: #141414;
+    border: 1px solid #2a2a2a;
+}
+
+code {
+    font-family: "JetBrains Mono", monospace;
+}
+
+:not(pre) > code {
+    color: #d4a843;
+    background-color: #1a1a1a;
+}
+
+/* Blockquotes */
+blockquote:not([class]) {
+    border-left-color: #d4a843;
+    color: #c0b9ad;
+}
+
+/* Tables */
+.gh-content table:not(.gist table) th {
+    color: #f0ece4;
+    background-color: #141414;
+}
+
+.gh-content table:not(.gist table) th,
+.gh-content table:not(.gist table) td {
+    border-color: #2a2a2a;
+}
+
+.gh-content table:not(.gist table) td:first-child {
+    background-image: linear-gradient(to right, #0c0c0c 50%, rgba(12, 12, 12, 0) 100%);
+}
+
+.gh-content table:not(.gist table) td:last-child {
+    background-image: linear-gradient(to left, #0c0c0c 50%, rgba(12, 12, 12, 0) 100%);
+}
+
+/* Figcaptions */
+figcaption {
+    color: #8a8578;
+}
+
+.gh-content figcaption a {
+    color: #d4a843;
+}
+
+/* --------------------------------------------------------------------------
+   9. Navigation (prev/next post)
+   -------------------------------------------------------------------------- */
+
+.gh-navigation-label {
+    color: #8a8578;
+}
+
+.gh-navigation-title {
+    color: #f0ece4;
+}
+
+.gh-navigation-link:hover .gh-navigation-title {
+    color: #d4a843;
+}
+
+/* --------------------------------------------------------------------------
+   10. Tag / Author Pages
+   -------------------------------------------------------------------------- */
+
+.gh-tag-label {
+    color: #d4a843;
+}
+
+.gh-pagehead-title {
+    color: #f0ece4;
+}
+
+.gh-pagehead-description {
+    color: #8a8578;
+}
+
+.gh-author-location {
+    color: #c0b9ad;
+}
+
+/* --------------------------------------------------------------------------
+   11. Footer
+   -------------------------------------------------------------------------- */
+
+.gh-foot {
+    color: #8a8578;
+    border-top: 1px solid #2a2a2a;
+}
+
+.gh-foot a {
+    color: #8a8578;
+}
+
+.gh-foot a:hover {
+    color: #d4a843;
+    opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   12. Ghost Card Styles (bookmark, callout, toggle, etc.)
+   -------------------------------------------------------------------------- */
+
+/* Bookmark card */
+.kg-bookmark-container {
+    border-color: #2a2a2a;
+}
+
+.kg-bookmark-content {
+    background-color: #141414;
+}
+
+.kg-bookmark-title {
+    color: #f0ece4;
+}
+
+.kg-bookmark-description {
+    color: #8a8578;
+}
+
+.kg-bookmark-metadata {
+    color: #8a8578;
+}
+
+.kg-bookmark-publisher {
+    color: #c0b9ad;
+}
+
+/* Callout card */
+.kg-callout-card {
+    background-color: #141414;
+    border-color: #2a2a2a;
+}
+
+.kg-callout-text {
+    color: #c0b9ad;
+}
+
+/* Toggle card */
+.kg-toggle-card {
+    background-color: #141414;
+    border-color: #2a2a2a;
+}
+
+.kg-toggle-heading-text {
+    color: #f0ece4;
+}
+
+.kg-toggle-content p {
+    color: #c0b9ad;
+}
+
+/* File card */
+.kg-file-card-container {
+    background-color: #141414;
+    border-color: #2a2a2a;
+}
+
+.kg-file-card-title {
+    color: #f0ece4;
+}
+
+.kg-file-card-caption {
+    color: #8a8578;
+}
+
+/* Product card */
+.kg-product-card-container {
+    border-color: #2a2a2a;
+}
+
+.kg-product-card-title {
+    color: #f0ece4;
+}
+
+.kg-product-card-description {
+    color: #c0b9ad;
+}
+
+/* Header card */
+.kg-header-card {
+    background-color: #141414;
+}
+
+/* --------------------------------------------------------------------------
+   13. Mobile Menu
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+    .is-head-open:not(.is-head-brand):not(.is-head-dark):not(.is-head-transparent) #gh-head {
+        background-color: #0c0c0c;
+    }
+
+    .is-head-open #gh-head .gh-head-actions {
+        background-color: #0c0c0c;
+    }
+
+    #gh-head .nav a {
+        color: #f0ece4;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   14. Comments
+   -------------------------------------------------------------------------- */
+
+.gh-comments {
+    border-top: 1px solid #2a2a2a;
+}
+
+/* --------------------------------------------------------------------------
+   15. Pagination
+   -------------------------------------------------------------------------- */
+
+.gh-pagination a {
+    color: #f0ece4;
+}
+
+.gh-pagination a:hover {
+    color: #d4a843;
+}
