@@ -334,6 +334,70 @@ hr {
 }
 
 /* --------------------------------------------------------------------------
+   7b. Consulting CTA (mid-post)
+   -------------------------------------------------------------------------- */
+
+.consulting-cta {
+    position: relative;
+    background-color: #141414;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    padding: 2.4rem;
+    margin: 3.2rem 0;
+    overflow: hidden;
+}
+
+.consulting-cta-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, #d4a843, #e8bd5a);
+}
+
+.consulting-cta-label {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #d4a843;
+    margin-bottom: 0.8rem;
+}
+
+.consulting-cta-title {
+    color: #f0ece4;
+    font-size: 2rem;
+    margin: 0 0 0.8rem;
+}
+
+.consulting-cta-description {
+    color: #c0b9ad;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    margin: 0 0 1.2rem;
+}
+
+.consulting-cta-link {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.3rem;
+    color: #d4a843;
+    text-decoration: none;
+}
+
+.consulting-cta-link:hover {
+    color: #e8bd5a;
+}
+
+@media (max-width: 767px) {
+    .consulting-cta {
+        padding: 1.6rem;
+        margin: 2.4rem 0;
+    }
+}
+
+/* --------------------------------------------------------------------------
    8. Article / Post Content
    -------------------------------------------------------------------------- */
 
