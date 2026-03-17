@@ -2,6 +2,10 @@
 @import "fonts.css";
 @import "dark-theme.css";
 
+:root {
+    --head-nav-gap: 3.2rem;
+}
+
 .tag-template .gh-main,
 .author-template .gh-main {
     padding-top: 8vmin;
@@ -15,13 +19,61 @@
     letter-spacing: 0.01em;
 }
 
-.gh-latest {
+/* Hero */
+
+.gh-hero {
+    max-width: 900px;
     margin-top: 4rem;
-    margin-bottom: 12rem;
+    margin-right: auto;
+    margin-bottom: 8rem;
+    margin-left: auto;
+    padding-bottom: 8rem;
+    text-align: center;
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.gh-hero-heading {
+    font-size: clamp(3.6rem, 5.6vw, 5.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.has-serif-title .gh-hero-heading {
+    font-family: var(--font-serif);
+}
+
+.gh-hero-description {
+    max-width: 600px;
+    margin-top: 2rem;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 2rem;
+    line-height: 1.5;
+    color: var(--color-secondary-text);
+}
+
+.gh-hero-cta {
+    margin-top: 3.2rem;
+}
+
+.gh-latest {
+    max-width: 720px;
+    margin-top: 4rem;
+    margin-bottom: 8rem;
 }
 
 .gh-latest .gh-card-meta {
     margin-top: 2.4rem;
+}
+
+.gh-latest .gh-article-title {
+    font-size: 2.8rem;
+    letter-spacing: -0.02em;
+}
+
+.gh-latest .gh-article-excerpt {
+    font-size: 1.8rem;
 }
 
 .gh-wrapper {
@@ -561,8 +613,25 @@
 }
 
 @media (max-width: 767px) {
+    .gh-hero {
+        margin-bottom: 6.4rem;
+        padding-bottom: 6.4rem;
+    }
+
+    .gh-hero-heading {
+        font-size: clamp(2.8rem, 7vw, 3.6rem);
+    }
+
+    .gh-hero-description {
+        font-size: 1.8rem;
+    }
+
     .gh-latest {
-        margin-bottom: 8rem;
+        margin-bottom: 6.4rem;
+    }
+
+    .gh-latest .gh-article-title {
+        font-size: 2.4rem;
     }
 
     .gh-wrapper {
@@ -649,3 +718,4 @@
         top: 1px;
     }
 }
+

@@ -1,6 +1,6 @@
 {
     "name": "journal-dark",
-    "description": "A Ghost theme",
+    "description": "Expert's Desk dark theme for Ghost",
     "version": "1.0.0",
     "private": true,
     "engines": {
@@ -56,6 +56,26 @@
                 "type": "select",
                 "options": ["Modern sans-serif", "Elegant serif"],
                 "default": "Modern sans-serif"
+            },
+            "hero_heading": {
+                "type": "text",
+                "default": "Smart leaders are stuck on AI. I show them the future and build the path there."
+            },
+            "hero_description": {
+                "type": "text",
+                "default": "You have the mandate, the tools, and the urgency. What you don't have is a picture of what success actually looks like. I do. I embed with your team, work on real outcomes, and when I'm done, the capability is theirs."
+            },
+            "hero_cta_text": {
+                "type": "text",
+                "default": "Let's talk"
+            },
+            "hero_cta_url": {
+                "type": "text",
+                "default": "https://cal.com/saadiq/30min"
+            },
+            "newsletter_name": {
+                "type": "text",
+                "default": ""
             }
         }
     },
@@ -66,10 +86,11 @@
     },
     "devDependencies": {
         "@tryghost/shared-theme-assets": "2.5.2",
+        "@tryghost/theme-translations": "^0.0.9",
         "autoprefixer": "10.4.27",
         "beeper": "2.1.0",
-        "cssnano": "7.1.2",
-        "gscan": "5.2.5",
+        "cssnano": "7.1.3",
+        "gscan": "5.3.5",
         "gulp": "5.0.1",
         "gulp-concat": "2.6.1",
         "gulp-livereload": "4.0.2",
@@ -77,8 +98,8 @@
         "gulp-uglify": "3.0.2",
         "gulp-zip": "5.1.0",
         "ordered-read-streams": "2.0.0",
-        "postcss": "8.5.6",
+        "postcss": "8.5.8",
         "postcss-easy-import": "4.0.0",
-        "pump": "3.0.3"
+        "pump": "3.0.4"
     }
 }
