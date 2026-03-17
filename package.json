@@ -57,22 +57,6 @@
                 "options": ["Modern sans-serif", "Elegant serif"],
                 "default": "Modern sans-serif"
             },
-            "hero_heading": {
-                "type": "text",
-                "default": "Smart leaders are stuck on AI. I show them the future and build the path there."
-            },
-            "hero_description": {
-                "type": "text",
-                "default": "You have the mandate, the tools, and the urgency. What you don't have is a picture of what success actually looks like. I do. I embed with your team, work on real outcomes, and when I'm done, the capability is theirs."
-            },
-            "hero_cta_text": {
-                "type": "text",
-                "default": "Let's talk"
-            },
-            "hero_cta_url": {
-                "type": "text",
-                "default": "https://cal.com/saadiq/30min"
-            },
             "newsletter_name": {
                 "type": "text",
                 "default": ""

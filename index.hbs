@@ -3,17 +3,6 @@
 <main id="gh-main" class="gh-main gh-outer">
     <div class="gh-inner">
         {{^is "paged"}}
-            {{#if @custom.hero_heading}}
-                <section class="gh-hero">
-                    <h1 class="gh-hero-heading">{{@custom.hero_heading}}</h1>
-                    {{#if @custom.hero_description}}
-                        <p class="gh-hero-description">{{@custom.hero_description}}</p>
-                    {{/if}}
-                    {{#if @custom.hero_cta_text}}{{#if @custom.hero_cta_url}}
-                        <a class="gh-hero-cta gh-btn gh-primary-btn" href="{{@custom.hero_cta_url}}">{{@custom.hero_cta_text}}</a>
-                    {{/if}}{{/if}}
-                </section>
-            {{/if}}
             {{#foreach posts limit="1"}}
                 <article class="gh-latest gh-card {{post_class}}">
                     <a class="gh-card-link" href="{{url}}">
