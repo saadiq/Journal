@@ -464,11 +464,12 @@ body::before {
 /* hide homepage sidebar — field-notes uses full-width feed */
 .gh-sidebar { display: none; }
 
-/* latest / featured hero */
-.gh-latest {
+/* latest / featured hero — // latest section marker, otherwise unbounded flow.
+   .gh-latest.gh-card beats the later-declared .gh-card base padding rule. */
+.gh-latest.gh-card {
     max-width: none;
     margin: 0;
-    padding: 88px 0 72px;
+    padding: 40px 0 40px;
     border-bottom: 1px solid var(--rule);
     position: relative;
     animation: fn-rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
@@ -489,21 +490,27 @@ body::before {
 
 .gh-latest > * { position: relative; z-index: 1; }
 
-.gh-latest .gh-card-link {
+/* Override base .gh-card .gh-card-link padding + negative margins so the
+   hover hit-area matches the tinted block (no bleed, no inset bg). */
+.gh-latest.gh-card .gh-card-link,
+.gh-latest.gh-card .gh-card-link:hover,
+.gh-latest.gh-card .gh-card-link:focus {
     display: block;
     text-decoration: none;
     color: inherit;
     padding: 0;
     margin: 0;
+    background: transparent;
+    border-radius: 0;
     grid-template-columns: none;
     gap: 0;
 }
-.gh-latest .gh-card-link:hover { opacity: 1; background: transparent; }
+.gh-latest.gh-card .gh-card-link:hover { opacity: 1; }
 
 /* feature image hero layout — body first, banner image stacked below at all widths.
    Covers are landscape banners (~4.75:1); rendering at natural aspect under the
    text reads like a masthead rather than a side panel. */
-.gh-latest.has-feature .gh-card-link {
+.gh-latest.gh-card.has-feature .gh-card-link {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
@@ -655,8 +662,9 @@ body::before {
     animation: fn-rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-/* override for the featured/latest card — no border duplicate */
-.gh-latest.gh-card { border-bottom: 1px solid var(--rule); animation-duration: 0.8s; }
+/* Featured/latest card border + animation are handled in the hero block
+   above; only the animation duration needs a nudge here. */
+.gh-latest.gh-card { animation-duration: 0.8s; }
 
 .gh-card .gh-card-link {
     display: grid;
