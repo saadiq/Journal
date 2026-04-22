@@ -730,32 +730,71 @@ body::before {
 /* ─────────────────────── subscribe block ─────────────────────── */
 
 .gh-subscribe {
-    margin: 72px auto;
-    max-width: var(--fn-max);
-    padding: 40px 44px;
-    background: var(--text);
-    color: var(--bg);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
+    margin: 96px 0 0;
+    width: 100%;
+    max-width: none;
+    padding-block: 56px 60px;
+    padding-inline: max(24px, calc((100% - 960px) / 2));
+    background: var(--bg-2);
+    color: var(--text);
     position: relative;
-    border-radius: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+}
+
+.gh-subscribe > .gh-outer {
+    padding: 0;
+    max-width: none;
+}
+
+.gh-subscribe-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: center;
+    max-width: none;
+    margin: 0;
+    text-align: left;
+}
+
+.gh-subscribe-inner > .gh-subscribe-title { grid-column: 1; grid-row: 2; align-self: start; }
+.gh-subscribe-inner > .gh-subscribe-description { grid-column: 1; grid-row: 3; align-self: start; }
+.gh-subscribe-inner > .gh-subscribe-input { grid-column: 2; grid-row: 2 / span 2; align-self: center; }
+
+.gh-subscribe-inner::before {
+    content: "// NEWSLETTER";
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 0;
 }
 
 @media (max-width: 780px) {
     .gh-subscribe {
+        padding-block: 48px 52px;
+        padding-inline: max(20px, calc((100% - 960px) / 2));
+    }
+    .gh-subscribe-inner {
         grid-template-columns: 1fr;
-        padding: 32px 28px;
         gap: 24px;
     }
-}
-
-.gh-subscribe-inner {
-    max-width: none;
-    margin: 0;
-    text-align: left;
-    display: contents;
+    /* reset explicit column placement from desktop — otherwise grid auto-creates
+       a phantom column 2 and the form escapes to the right */
+    .gh-subscribe-inner > .gh-subscribe-title,
+    .gh-subscribe-inner > .gh-subscribe-description,
+    .gh-subscribe-inner > .gh-subscribe-input {
+        grid-column: 1;
+        align-self: start;
+    }
+    .gh-subscribe-inner > .gh-subscribe-title { grid-row: 2; }
+    .gh-subscribe-inner > .gh-subscribe-description { grid-row: 3; }
+    .gh-subscribe-inner > .gh-subscribe-input { grid-row: 4; margin-top: 4px; }
 }
 
 .gh-subscribe-title {
@@ -764,7 +803,7 @@ body::before {
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.025em;
-    color: var(--bg);
+    color: var(--text);
     margin: 0;
 }
 
@@ -778,14 +817,14 @@ body::before {
     font-family: var(--font-serif);
     font-style: italic;
     font-weight: 400;
-    color: var(--accent-bright);
+    color: var(--accent);
 }
 
 .gh-subscribe-description {
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 400;
-    color: rgba(246, 246, 244, 0.55);
+    color: var(--muted);
     line-height: 1.55;
     margin: 14px 0 0;
 }
@@ -810,9 +849,9 @@ body::before {
     font-family: var(--font-mono);
     font-size: 13px;
     padding: 13px 14px;
-    background: rgba(246, 246, 244, 0.06);
-    color: var(--bg);
-    border: 1px solid rgba(246, 246, 244, 0.2);
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--rule);
     border-radius: 2px;
     outline: none;
     transition: border-color 0.2s ease, background 0.2s ease;
@@ -823,12 +862,12 @@ body::before {
 }
 
 .gh-subscribe input[type="email"]::placeholder {
-    color: rgba(246, 246, 244, 0.4);
+    color: var(--muted);
 }
 
 .gh-subscribe input[type="email"]:focus {
-    border-color: var(--accent-bright);
-    background: rgba(246, 246, 244, 0.1);
+    border-color: var(--accent);
+    background: var(--surface);
 }
 
 .gh-subscribe-input svg { display: none; }
@@ -838,13 +877,13 @@ body::before {
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 600;
-    background: var(--accent-bright);
-    color: var(--text);
+    background: var(--text);
+    color: var(--bg);
     border: 0;
     padding: 13px 16px;
     border-radius: 2px;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.15s ease;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -856,11 +895,15 @@ body::before {
 }
 
 .gh-subscribe-input-btn::before,
-.gh-subscribe-btn::before { content: "▸"; }
+.gh-subscribe-btn::before {
+    content: "▸";
+    color: var(--accent);
+}
 
 .gh-subscribe-input-btn:hover,
 .gh-subscribe-btn:hover {
-    background: var(--bg);
+    background: var(--accent);
+    color: var(--text);
     transform: translateY(-1px);
 }
 
