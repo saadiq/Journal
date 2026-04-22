@@ -373,7 +373,7 @@ body::before {
 /* ─────────────────────── manifesto (homepage positioning strip) ─────────────────────── */
 
 .fn-manifesto {
-    padding: 48px 0 36px;
+    padding: 36px 0 28px;
     border-bottom: 1px solid var(--rule-faint);
     animation: fn-rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
@@ -385,18 +385,18 @@ body::before {
     font-weight: 500;
     letter-spacing: 0.06em;
     color: var(--accent);
-    margin-bottom: 18px;
+    margin-bottom: 10px;
     text-transform: none;
 }
 
 .fn-manifesto-text {
     font-family: var(--font-display);
-    font-size: clamp(24px, 3.2vw, 36px);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.025em;
+    font-size: clamp(18px, 1.9vw, 22px);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
     color: var(--text);
-    margin: 0 0 20px;
+    margin: 0 0 10px;
     max-width: 820px;
 }
 
@@ -418,7 +418,7 @@ body::before {
     font-size: 13px;
     line-height: 1.55;
     color: var(--muted);
-    margin: 0 0 22px;
+    margin: 0 0 14px;
     max-width: 620px;
 }
 
@@ -616,14 +616,14 @@ body::before {
     grid-template-columns: 1fr auto;
     gap: 20px;
     align-items: center;
-    padding: 56px 0 24px;
+    padding: 32px 0 24px;
     margin-bottom: 0;
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
-    color: var(--text);
+    color: var(--accent);
     text-transform: none;
-    letter-spacing: 0;
+    letter-spacing: 0.06em;
 }
 
 .gh-section-title::after {
