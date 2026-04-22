@@ -1,7 +1,7 @@
 {
-    "name": "journal-dark",
-    "description": "Expert's Desk dark theme for Ghost",
-    "version": "1.0.0",
+    "name": "journal-field-notes",
+    "description": "Field Notes — tech-editorial newsletter theme for saadiq.xyz",
+    "version": "2.0.0",
     "private": true,
     "engines": {
         "ghost": ">=5.0.0"
