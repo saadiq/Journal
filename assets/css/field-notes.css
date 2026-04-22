@@ -1718,7 +1718,6 @@ body::before {
 
 .gh-pagehead {
     position: static;
-    grid-column: auto;
     max-width: var(--fn-max);
     padding: 56px 0 32px;
     border-bottom: 1px solid var(--rule);
