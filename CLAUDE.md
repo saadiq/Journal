@@ -57,7 +57,7 @@ This repo is a fork of `TryGhost/Journal`. Stay close to upstream — merge, don
 
 ## Deploy
 
-Theme is deployed to `/var/www/ghost/content/themes/journal-dark` on the shared droplet (`167.71.169.225`). The directory is **not a git repo on the server** — deploys are file sync.
+Theme is deployed to `/var/www/ghost/content/themes/journal-field-notes` on the shared droplet (`167.71.169.225`). The directory is **not a git repo on the server** — deploys are file sync. The active theme in Ghost Admin is `journal-field-notes` (`package.json` name, v2.0.0+). The old `journal-dark` directory may still exist on disk as a fallback — leave it unless explicitly asked to remove it.
 
 ### Permissions gotcha
 
@@ -65,30 +65,30 @@ The theme dir is owned by `ghost:ghost` (mode 775/664). The `saadiq` user is **n
 
 ### Deploy steps
 
-From `~/dev/journal` on `dark-theme` branch, with a clean working tree and fresh `bunx gulp build`:
+From `~/dev/journal` on `field-notes` branch, with a clean working tree and fresh `bunx gulp build`:
 
 ```bash
 # 1. Push
-git push origin dark-theme
+git push origin field-notes
 
 # 2. Sync files (macOS rsync lacks --chown, so chown separately)
 rsync -av --partial --rsync-path='sudo rsync' \
   --exclude=node_modules --exclude=dist --exclude=.git \
   --exclude=.DS_Store --exclude=.superpowers --exclude=.claude \
   --exclude=CLAUDE.md --exclude=.gitignore --exclude=yarn-error.log \
-  ~/dev/journal/ saadiq@167.71.169.225:/var/www/ghost/content/themes/journal-dark/
+  ~/dev/journal/ saadiq@167.71.169.225:/var/www/ghost/content/themes/journal-field-notes/
 
 # 3. Fix ownership (rsync ran as root)
-ssh saadiq@167.71.169.225 "sudo chown -R ghost:ghost /var/www/ghost/content/themes/journal-dark"
+ssh saadiq@167.71.169.225 "sudo chown -R ghost:ghost /var/www/ghost/content/themes/journal-field-notes"
 
 # 4. Restart Ghost to flush theme cache
 ssh saadiq@167.71.169.225 "sudo systemctl restart ghost_167-71-169-225.service"
 
-# 5. Smoke test
+# 5. Smoke test (wait ~8s after restart before probing — /newsletter/ returns 503 during boot)
 curl -s -o /dev/null -w 'HTTP %{http_code}\n' https://saadiq.xyz/newsletter/
 ```
 
-Ghost restart is ~5 seconds of 503s on `/newsletter/`. The main `saadiq.xyz` Astro site is unaffected (served directly by nginx).
+Ghost restart is ~8 seconds of 503s on `/newsletter/`. The main `saadiq.xyz` Astro site is unaffected (served directly by nginx).
 
 ### Verify share button / new features
 
