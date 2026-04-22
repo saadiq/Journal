@@ -1732,8 +1732,10 @@ body::before {
 
 /* ─────────────────────── archive / author / tag ─────────────────────── */
 
-.tag-template .gh-main,
-.author-template .gh-main { padding-top: 48px; }
+/* Match ID specificity: the homepage override at #gh-main { padding-top: 0 }
+   would otherwise beat a class-only archive rule and zero this out too. */
+.tag-template #gh-main,
+.author-template #gh-main { padding-top: 48px; }
 
 .gh-pagehead {
     position: static;
