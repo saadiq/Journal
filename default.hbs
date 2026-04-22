@@ -10,10 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
     {{ghost_head}}
 </head>
 
@@ -29,7 +25,11 @@
                         {{#if @site.logo}}
                             <img src="{{@site.logo}}" alt="{{@site.title}}">
                         {{else}}
-                            {{@site.title}}
+                            <span class="brand-dot" aria-hidden="true"></span>
+                            <span class="brand-host">saadiq.xyz</span>
+                            <span class="brand-path">~/newsletter</span>
+                            <span class="brand-branch">(main)</span>
+                            <span class="brand-cursor" aria-hidden="true"></span>
                         {{/if}}
                     </a>
                 </div>
@@ -70,6 +70,8 @@
             </div>
         </div>
     </header>
+
+    {{> "bridge"}}
 
     {{{body}}}
 
