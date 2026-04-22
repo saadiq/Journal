@@ -1875,16 +1875,6 @@ body::before {
 
 .gh-foot-menu a:hover { color: var(--accent); }
 
-.gh-powered-by {
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    color: var(--muted);
-    opacity: 0.7;
-}
-
-.gh-powered-by a { color: inherit; }
-.gh-powered-by a:hover { color: var(--accent); opacity: 1; }
-
 /* ─────────────────────── consulting CTA (inserted mid-post) ─────────────────────── */
 
 .gh-content .consulting-cta {
