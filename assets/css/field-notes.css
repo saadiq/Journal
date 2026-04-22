@@ -1167,42 +1167,6 @@ body::before {
     padding: 0;
 }
 
-/* share button — terminal-command styling */
-.gh-button-share,
-button.gh-button-share {
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    font-weight: 400;
-    color: var(--text-2);
-    background: var(--bg);
-    border: 1px solid var(--rule);
-    padding: 8px 12px;
-    border-radius: 2px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-    text-transform: none;
-    letter-spacing: 0;
-    line-height: 1;
-    text-decoration: none;
-}
-
-.gh-button-share::before {
-    content: "$";
-    color: var(--accent);
-    font-weight: 600;
-}
-
-.gh-button-share:hover {
-    color: var(--text);
-    border-color: var(--text);
-    background: var(--surface);
-}
-
-.gh-button-share svg { width: 12px; height: 12px; }
-
 /* prev/next navigation */
 .gh-navigation {
     display: grid;
