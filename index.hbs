@@ -3,6 +3,14 @@
 <main id="gh-main" class="gh-main gh-outer">
     <div class="gh-inner">
         {{^is "paged"}}
+            <section class="fn-manifesto">
+                <span class="fn-manifesto-label">// what i do</span>
+                <h2 class="fn-manifesto-text">
+                    Your team has the tools. <em>Nothing has changed.</em>
+                </h2>
+                <p class="fn-manifesto-sub">That's the problem I solve. Notes from the work.</p>
+                <a href="https://saadiq.xyz" class="fn-manifesto-link">work with me &rarr;</a>
+            </section>
             {{#foreach posts limit="1"}}
                 <article class="gh-latest gh-card {{post_class}}{{#if feature_image}} has-feature{{/if}}">
                     <a class="gh-card-link" href="{{url}}">
@@ -55,7 +63,7 @@
 
         <div class="gh-wrapper is-single-column">
             <section class="gh-section">
-                <h2 class="gh-section-title">the archive</h2>
+                <h2 class="gh-section-title">before</h2>
 
                 <div class="gh-feed">
                     {{^is "paged"}}
