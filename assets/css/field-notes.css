@@ -259,6 +259,14 @@ body::before {
     letter-spacing: 0;
 }
 
+/* Ghost base adds decorative 1px rules at top:80px and top:136px (via
+   .gh-head-menu::after and .is-head-stacked .gh-head-menu::before) to
+   separate rows of a stacked-nav layout. Our single-line brand row doesn't
+   need them — they read as stray dividers between the header and the
+   manifesto. */
+.gh-head-menu::before,
+.gh-head-menu::after { display: none; }
+
 .gh-head-menu ul {
     display: flex;
     gap: 4px;
