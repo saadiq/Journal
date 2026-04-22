@@ -505,6 +505,23 @@ figcaption {
     color: #d4a843;
 }
 
+.gh-button-share {
+    display: inline-flex;
+    align-items: center;
+    color: #ac9e90;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.8;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    transition: color 0.15s ease;
+}
+
+.gh-button-share:hover {
+    color: #d4a843;
+    opacity: 1;
+}
+
 /* --------------------------------------------------------------------------
    10. Tag / Author Pages
    -------------------------------------------------------------------------- */
