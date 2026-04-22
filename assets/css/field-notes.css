@@ -455,7 +455,10 @@ body::before {
 
 /* ─────────────────────── main + feed ─────────────────────── */
 
-.gh-main {
+/* Ghost base sets `#gh-main { padding-top: 4.8rem }` under (max-width: 767px),
+   which outranks `.gh-main` via ID specificity. Match the selector to keep the
+   manifesto tight under the header on narrow widths. */
+#gh-main {
     padding-top: 0;
 }
 
