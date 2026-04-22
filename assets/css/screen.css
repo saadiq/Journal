@@ -1,6 +1,6 @@
 @import "@tryghost/shared-theme-assets/assets/css/v1/screen.css";
 @import "fonts.css";
-@import "dark-theme.css";
+@import "field-notes.css";
 
 :root {
     --head-nav-gap: 3.2rem;
