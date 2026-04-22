@@ -1,0 +1,113 @@
+{{!-- Rename bridge banner: shows to all visitors until dismissed or until expiration date. --}}
+{{!-- Rename date: 2026-04-21. Banner auto-expires 90 days later. Dismissal persists via localStorage. --}}
+
+<aside class="fn-bridge" id="fn-bridge" role="note" hidden>
+    <div class="gh-outer">
+        <div class="fn-bridge-inner gh-inner">
+            <span class="fn-bridge-icon" aria-hidden="true">※</span>
+            <p class="fn-bridge-text">
+                <strong>field notes</strong> is the continuation of
+                <em>progress over perfection</em> — same writer, sharper
+                focus on what&rsquo;s actually working inside AI rollouts.
+                Your subscription carried over; nothing to do.
+            </p>
+            <button class="fn-bridge-dismiss" type="button" aria-label="Dismiss">
+                dismiss
+            </button>
+        </div>
+    </div>
+</aside>
+
+<style>
+    .fn-bridge {
+        background: rgba(139, 94, 22, 0.06);
+        border-bottom: 1px solid #dedcd6;
+    }
+    .fn-bridge[hidden] { display: none; }
+    .fn-bridge-inner {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding: 12px 0;
+    }
+    .fn-bridge-icon {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-size: 22px;
+        color: #8b5e16;
+        line-height: 1;
+        transform: translateY(-1px);
+    }
+    .fn-bridge-text {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12px;
+        line-height: 1.55;
+        color: #2a2a2a;
+        margin: 0;
+        letter-spacing: 0;
+    }
+    .fn-bridge-text strong {
+        font-family: "Inter", system-ui, sans-serif;
+        font-weight: 700;
+        color: #0a0a0a;
+        letter-spacing: -0.01em;
+    }
+    .fn-bridge-text em {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        color: #8b5e16;
+        letter-spacing: 0;
+        font-size: 14px;
+    }
+    .fn-bridge-dismiss {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11px;
+        color: #737370;
+        background: transparent;
+        border: 1px solid #dedcd6;
+        padding: 6px 12px;
+        border-radius: 2px;
+        cursor: pointer;
+        transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    .fn-bridge-dismiss::after { content: " \2715"; opacity: 0.6; }
+    .fn-bridge-dismiss:hover {
+        color: #0a0a0a;
+        border-color: #0a0a0a;
+        background: #f6f6f4;
+    }
+    @media (max-width: 640px) {
+        .fn-bridge-inner {
+            grid-template-columns: auto 1fr;
+            row-gap: 8px;
+        }
+        .fn-bridge-dismiss {
+            grid-column: 1 / -1;
+            justify-self: end;
+        }
+    }
+</style>
+
+<script>
+(function () {
+    var KEY = "fn-bridge-dismissed";
+    var EXPIRES = new Date("2026-07-21T00:00:00Z").getTime();
+    var el = document.getElementById("fn-bridge");
+    if (!el) return;
+    try {
+        if (Date.now() >= EXPIRES) return;
+        if (localStorage.getItem(KEY) === "1") return;
+    } catch (e) {
+        // localStorage unavailable (private mode, etc.) — still show, but dismiss won't persist
+    }
+    el.removeAttribute("hidden");
+    var btn = el.querySelector(".fn-bridge-dismiss");
+    if (btn) {
+        btn.addEventListener("click", function () {
+            try { localStorage.setItem(KEY, "1"); } catch (e) {}
+            el.setAttribute("hidden", "");
+        });
+    }
+})();
+</script>
