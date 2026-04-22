@@ -34,6 +34,7 @@
 
     /* layout */
     --fn-max: 1080px;
+    --fn-hero: 1100px;
     --fn-measure: 640px;
 }
 
@@ -118,18 +119,59 @@ body::before {
     font-size: 12px;
 }
 
-.gh-head-inner {
+#gh-head .gh-head-inner,
+.gh-head-inner,
+.is-head-stacked .gh-head-inner,
+.is-head-left-logo .gh-head-inner,
+.is-head-middle-logo .gh-head-inner {
     display: grid;
     grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto;
+    grid-template-areas: "brand menu actions";
     gap: 32px;
     align-items: center;
+    justify-content: start;
     max-width: var(--fn-max);
     margin: 0 auto;
     padding: 0 40px;
+    height: auto;
 }
+
+#gh-head .gh-head-brand,
+.gh-head-brand { grid-area: brand; grid-row: auto; grid-column: auto; justify-content: flex-start; margin: 0; min-height: 0; height: auto; }
+
+/* Ghost base forces `.gh-head { height: 100px }` and `.gh-head-inner { height: 100% }`
+   — for a single-line terminal-prompt brand, 100px is way too tall. Collapse to
+   content-sized, no row-gap (single row), minimal padding. */
+#gh-head.gh-head { height: auto; min-height: 0; padding: 14px 0; }
+#gh-head .gh-head-inner { row-gap: 0; grid-template-rows: auto; height: auto; min-height: 0; }
+
+#gh-head .gh-head-menu,
+.gh-head-menu,
+.is-head-stacked .gh-head-menu {
+    grid-area: menu;
+    grid-row: auto;
+    grid-column: auto;
+    justify-content: flex-end;
+    height: auto;
+    margin: 0;
+}
+
+#gh-head .gh-head-actions,
+.gh-head-actions { grid-area: actions; grid-row: auto; grid-column: auto; justify-content: flex-end; margin: 0; }
 
 @media (max-width: 640px) {
     .gh-head-inner { padding: 0 20px; gap: 16px; }
+    .gh-head-brand,
+    .gh-head-brand-wrapper { font-size: 12px; gap: 4px; flex-wrap: nowrap; min-width: 0; }
+    .gh-head-logo { white-space: nowrap; }
+    .brand-path { white-space: nowrap; }
+}
+
+@media (max-width: 520px) {
+    /* collapse to just `~/field-notes` — parent-site prefix is available via the link back home */
+    .brand-host,
+    .brand-sep { display: none; }
 }
 
 /* brand "terminal prompt" logo */
@@ -137,23 +179,28 @@ body::before {
 .gh-head-brand-wrapper {
     display: flex;
     align-items: center;
-}
-
-.gh-head-logo,
-.gh-head-site-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-family: var(--font-mono);
     font-size: 13px;
     font-weight: 500;
     color: var(--muted);
-    text-decoration: none;
     letter-spacing: 0;
     text-transform: none;
 }
 
-.gh-head-logo img { display: none; }
+#gh-head .gh-head-logo,
+.gh-head-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: 0;
+}
+
+.gh-head-logo img { max-height: 28px; width: auto; display: block; }
 
 .brand-dot {
     width: 7px;
@@ -161,30 +208,39 @@ body::before {
     border-radius: 999px;
     background: var(--ok);
     box-shadow: 0 0 8px var(--ok);
-    margin-right: 2px;
     display: inline-block;
     flex-shrink: 0;
 }
 
-.brand-host { color: var(--text-2); }
+.brand-host {
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.brand-host:hover { color: var(--accent); }
+
+.brand-sep {
+    color: var(--muted);
+    opacity: 0.55;
+    margin: 0 -2px;
+}
 
 .brand-path {
     font-family: var(--font-mono);
     font-weight: 600;
     color: var(--text);
+    transition: color 0.2s ease;
 }
 
-.brand-branch {
-    color: var(--accent);
-    font-weight: 500;
-}
+.gh-head-logo:hover .brand-path { color: var(--accent); }
 
 .brand-cursor {
     display: inline-block;
     width: 7px;
     height: 13px;
     background: var(--accent);
-    margin-left: 2px;
+    margin-left: 4px;
     animation: fn-blink 1.1s step-end infinite;
     transform: translateY(1px);
     flex-shrink: 0;
@@ -194,7 +250,8 @@ body::before {
 .gh-head-menu {
     display: flex;
     gap: 4px;
-    justify-content: center;
+    justify-content: flex-end;
+    align-items: center;
     font-family: var(--font-mono);
     font-size: 11.5px;
     font-weight: 400;
@@ -443,8 +500,46 @@ body::before {
 }
 .gh-latest .gh-card-link:hover { opacity: 1; background: transparent; }
 
-.gh-latest .gh-card-image,
-.gh-latest .gh-card-feature-image { display: none; }
+/* feature image hero layout — body first, banner image stacked below at all widths.
+   Covers are landscape banners (~4.75:1); rendering at natural aspect under the
+   text reads like a masthead rather than a side panel. */
+.gh-latest.has-feature .gh-card-link {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+/* Excerpt/footer are the last text before the banner image; the grid gap is
+   the authoritative space to the image, so zero their trailing margins.
+   Ghost base has `.gh-card-meta { margin: 0 0 28px }` — need extra weight. */
+.gh-latest .gh-latest-body > :last-child,
+.gh-latest .gh-latest-body .gh-card-meta:last-child,
+.gh-latest .gh-latest-body .gh-article-excerpt:last-child,
+.gh-latest .gh-latest-body .gh-card-excerpt:last-child { margin-bottom: 0; }
+
+.gh-latest-image {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    background: var(--bg-2);
+    order: 2;
+}
+
+.gh-latest-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gh-latest .gh-card-link:hover .gh-latest-image img { transform: scale(1.02); }
+
+.gh-latest-body { order: 1; min-width: 0; }
+
+@media (max-width: 900px) {
+    .gh-latest.has-feature .gh-card-link { gap: 16px; }
+}
 
 .gh-latest .gh-card-header {
     display: block;
@@ -471,13 +566,20 @@ body::before {
 .gh-latest .gh-article-title,
 .gh-latest .gh-card-title {
     font-family: var(--font-display);
-    font-size: clamp(60px, 9.5vw, 142px);
+    font-size: clamp(42px, 5.4vw, 80px);
     font-weight: 800;
-    line-height: 0.9;
-    letter-spacing: -0.045em;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
     color: var(--text);
     margin: 0 0 28px;
     word-break: normal;
+}
+
+/* when no feature image: give the title room to breathe as a brutalist display slug */
+.gh-latest:not(.has-feature) .gh-article-title,
+.gh-latest:not(.has-feature) .gh-card-title {
+    font-size: clamp(56px, 8vw, 120px);
+    line-height: 0.9;
 }
 
 .has-serif-title .gh-latest .gh-article-title,
@@ -600,6 +702,11 @@ body::before {
     margin-bottom: 4px;
     transition: color 0.2s ease;
     vertical-align: baseline;
+    /* show the tail of the id — ObjectIds share a timestamp prefix,
+       so the counter/variety lives at the end. rtl block flow clips
+       from the left; hex digits render LTR inside. */
+    direction: rtl;
+    text-align: left;
 }
 
 .gh-card-date {
@@ -935,29 +1042,68 @@ body::before {
         [wide-end] minmax(20px, auto) [full-end];
 }
 
-.gh-article-header,
+/* post header: single unified hero block at one column width —
+   meta, title, excerpt, byline, share-bar, and cover image all share
+   the same width and left edge, forming one cohesive hero */
 .gh-article > .gh-article-header {
-    padding: 0 0 40px;
+    display: block;
+    grid-template-columns: none;
+    max-width: var(--fn-hero, 1100px);
+    margin: 0 auto 56px;
+    padding: 0 24px 40px;
     border-bottom: 1px solid var(--rule);
-    margin-bottom: 56px;
     animation: fn-rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-.gh-article:not(.no-image) .gh-article-header > * {
-    grid-column: main-start / main-end;
+.gh-article > .gh-article-header > * {
+    max-width: none;
 }
 
-/* hide feature image and its figure wrappers */
-.gh-article .gh-article-image,
-.gh-article .gh-article-feature-image,
-.gh-article figure.gh-article-image { display: none; }
+/* cover image renders at natural aspect — many post covers are
+   intentional wide-ribbon illustrations; don't crop them */
+.gh-article-image {
+    margin: 24px 0 0;
+}
 
-.gh-article-meta {
+.gh-article-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--rule);
+    background: var(--bg-2);
+}
+
+.gh-article-image figcaption {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 12px;
+    padding: 0 4px;
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .gh-article > .gh-article-header { padding: 0 16px 32px; }
+    /* break the cover image out of the hero padding so it renders edge-to-edge;
+       banner-aspect covers need the extra width to have any presence on phones */
+    .gh-article-image {
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+    .gh-article-image img {
+        border-left: 0;
+        border-right: 0;
+    }
+    .gh-article-image figcaption { padding: 0 16px; }
+}
+
+.gh-article-meta,
+.gh-article-meta-row {
     display: flex;
     align-items: center;
     gap: 12px;
     font-family: var(--font-mono);
-    font-size: 11.5px;
+    font-size: 12px;
     color: var(--muted);
     margin-bottom: 32px;
     flex-wrap: wrap;
@@ -967,10 +1113,47 @@ body::before {
     line-height: 1.5;
 }
 
-.gh-article-meta a {
+.gh-article-meta a,
+.gh-article-meta-row a {
     font-weight: 500;
     color: var(--text);
     text-decoration: none;
+}
+
+/* unify hash + label sizing — no more superscript treatment */
+.gh-article-hash-label {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.gh-article-hash-label.is-head {
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.gh-article-hash-label .gh-card-hash,
+.gh-article-meta-row .gh-card-hash,
+.gh-article-meta .gh-card-hash {
+    font-size: inherit;
+    font-weight: inherit;
+    color: var(--text-2);
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 0;
+    vertical-align: baseline;
+    line-height: inherit;
+}
+
+.gh-article-hash-label.is-head .gh-card-hash {
+    color: var(--accent);
 }
 
 .gh-article-tag {
@@ -1031,7 +1214,8 @@ body::before {
     animation: fn-rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.08s both;
 }
 
-.gh-content > * + * { margin-top: 1.4em; }
+.gh-content > * + * { margin-top: 1.9em; }
+.gh-content > p + p { margin-top: 1.5em; }
 
 .gh-content p {
     margin: 0;
@@ -1266,58 +1450,209 @@ body::before {
 /* ─────────────────────── article footer: share + nav ─────────────────────── */
 
 .gh-article-footer {
-    padding-top: 24px;
-    margin-top: 56px;
+    padding-top: 32px;
+    margin-top: 64px;
     border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 24px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    padding-bottom: 48px;
+}
+
+.gh-article-footer > .gh-navigation {
+    grid-column: main-start / main-end;
 }
 
 .gh-article-footer.no-border {
     margin-top: 24px;
     border-top: 0;
-    border-bottom: 0;
-    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
-/* prev/next navigation */
+/* ─────────────────────── share bar (top + bottom of post) ─────────────────────── */
+
+.gh-share-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.gh-share-bar .gh-share-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.gh-share-bar .gh-share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.gh-share-bar .gh-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 11px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 400;
+    color: var(--text-2);
+    background: var(--bg-2);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.gh-share-bar .gh-share-btn:hover {
+    color: var(--text);
+    background: var(--surface);
+    border-color: var(--text);
+    transform: translateY(-1px);
+    opacity: 1;
+}
+
+.gh-share-bar .gh-share-btn svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
+.gh-share-bar .gh-share-btn[data-copied="true"] {
+    color: var(--ok);
+    border-color: var(--ok);
+    background: rgba(45, 128, 64, 0.06);
+}
+
+.gh-share-bar .gh-share-btn[data-copied="true"] .gh-share-copy-label::before {
+    content: "copied ✓ — ";
+}
+
+/* top variant: compact, right-aligned, above feature image */
+.gh-share-bar-top {
+    margin-top: 8px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule-faint);
+    justify-content: flex-start;
+}
+
+.gh-share-bar-top .gh-share-btn span {
+    /* hide text labels on top bar — icons + site-link style only */
+    display: none;
+}
+
+.gh-share-bar-top .gh-share-btn .gh-share-copy-label { display: none; }
+
+.gh-share-bar-top .gh-share-btn[data-copied="true"] .gh-share-copy-label {
+    display: inline-block;
+    font-size: 10.5px;
+}
+
+/* bottom variant: prominent, full-width band inside wide column, labels visible */
+.gh-share-bar-bottom {
+    grid-column: wide-start / wide-end;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+    padding: 22px 28px;
+    margin: 0 0 32px;
+    background: var(--bg-2);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+}
+
+.gh-share-bar-bottom .gh-share-label {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.gh-share-bar-bottom .gh-share-buttons {
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.gh-share-bar-bottom .gh-share-btn {
+    padding: 9px 13px;
+    font-size: 12px;
+    background: var(--bg);
+}
+
+@media (max-width: 640px) {
+    .gh-share-bar-bottom {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 16px 18px;
+        margin-bottom: 24px;
+    }
+    .gh-share-bar-bottom .gh-share-buttons { justify-content: flex-start; gap: 6px; }
+    .gh-share-bar-bottom .gh-share-btn {
+        padding: 7px 10px;
+        font-size: 11px;
+        gap: 5px;
+    }
+    .gh-share-bar-bottom .gh-share-btn span { font-size: 11px; }
+    .gh-share-bar-bottom .gh-share-btn .gh-share-copy-label { display: none; }
+    .gh-share-bar-bottom .gh-share-btn[data-copied="true"] .gh-share-copy-label {
+        display: inline-block;
+    }
+}
+
+/* prev/next navigation + share */
 .gh-navigation {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin: 56px 0 0;
+    gap: 16px;
+    margin: 0;
     padding: 0;
     border: 0;
     grid-column: main-start / main-end;
+    align-items: stretch;
 }
 
-.gh-navigation > div {
-    display: block;
-    padding: 20px 24px;
+.gh-navigation-previous,
+.gh-navigation-next {
+    min-width: 0;
+    padding: 18px 22px;
     background: var(--bg-2);
     border: 1px solid var(--rule);
     border-radius: 2px;
     transition: background 0.2s ease, border-color 0.2s ease;
-    height: auto;
-    align-items: initial;
+    display: flex;
+    align-items: center;
 }
 
-.gh-navigation > div:hover {
+.gh-navigation-previous:hover,
+.gh-navigation-next:hover {
     background: var(--surface);
     border-color: var(--text);
 }
 
-.gh-navigation-previous,
-.gh-navigation-next { min-width: 0; }
+.gh-navigation-previous:not(:has(a)),
+.gh-navigation-next:not(:has(a)) {
+    background: transparent;
+    border: 0;
+    pointer-events: none;
+}
 
 .gh-navigation-middle {
-    display: none;
-    padding-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1 / -1;
+    order: 2;
+    margin-top: 8px;
+    padding: 0;
 }
 
 .gh-navigation-link {
@@ -1550,6 +1885,131 @@ body::before {
 .gh-powered-by a { color: inherit; }
 .gh-powered-by a:hover { color: var(--accent); opacity: 1; }
 
+/* ─────────────────────── consulting CTA (inserted mid-post) ─────────────────────── */
+
+.gh-content .consulting-cta {
+    grid-column: full-start / full-end;
+    position: relative;
+    display: block;
+    background: #0a0a0a;
+    color: #f6f6f4;
+    /* full-bleed band, content centered within max 960px — wider than the 640px text column, narrower than viewport */
+    padding-block: 56px 60px;
+    padding-inline: max(24px, calc((100% - 960px) / 2));
+    margin: 3.6em 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    font-family: var(--font-body);
+    overflow: hidden;
+}
+
+.gh-content .consulting-cta::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0,
+        var(--accent-bright) 20%,
+        var(--accent-bright) 80%,
+        transparent 100%
+    );
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.consulting-cta-accent {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: clamp(24px, 6vw, 88px);
+    width: 2px;
+    background: var(--accent-bright);
+    opacity: 0.35;
+    display: none;
+}
+
+.gh-content .consulting-cta-label {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 18px;
+}
+
+.gh-content .consulting-cta-label::before {
+    content: "// ";
+    opacity: 0.7;
+}
+
+.gh-content .consulting-cta-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: #ffffff;
+    margin: 0 0 20px;
+    max-width: 680px;
+}
+
+/* suppress the inherited `.gh-content h2::before { content: "##" }` prompt glyph on the CTA title */
+.gh-content .consulting-cta-title::before { display: none; }
+
+.gh-content .consulting-cta-description {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    color: #c9c7c1;
+    margin: 0 0 28px;
+    max-width: 640px;
+    font-style: normal;
+}
+
+.gh-content .consulting-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #0a0a0a;
+    background: var(--accent-bright);
+    padding: 12px 22px;
+    text-decoration: none;
+    border: 1px solid var(--accent-bright);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.gh-content .consulting-cta-link::before {
+    content: "$ ";
+    opacity: 0.55;
+}
+
+.gh-content .consulting-cta-link:hover {
+    background: transparent;
+    color: var(--accent-bright);
+    opacity: 1;
+    transform: translateX(2px);
+}
+
+@media (max-width: 640px) {
+    .gh-content .consulting-cta {
+        padding-block: 44px 48px;
+        padding-inline: 24px;
+        margin: 2.8em 0;
+    }
+    .gh-content .consulting-cta-title { font-size: 28px; }
+    .gh-content .consulting-cta-description { font-size: 16px; }
+}
+
 /* ─────────────────────── responsive tweaks ─────────────────────── */
 
 @media (max-width: 1100px) {
@@ -1579,8 +2039,7 @@ body::before {
 /* ─────────────────────── hide Ghost features we don't use ─────────────────────── */
 
 .gh-card-image,
-.gh-feature-image,
-.gh-article-image { display: none; }
+.gh-feature-image { display: none; }
 
 .kg-card,
 .kg-embed-card,
