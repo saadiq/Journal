@@ -79,13 +79,19 @@
     }
     @media (max-width: 640px) {
         .fn-bridge-inner {
-            grid-template-columns: auto 1fr;
-            row-gap: 8px;
+            grid-template-columns: auto 1fr auto;
+            column-gap: 12px;
+            align-items: start;
+            padding: 10px 0;
         }
+        .fn-bridge-icon { font-size: 18px; transform: translateY(1px); }
+        .fn-bridge-text { font-size: 11.5px; }
         .fn-bridge-dismiss {
-            grid-column: 1 / -1;
-            justify-self: end;
+            padding: 4px 8px;
+            font-size: 0;
+            line-height: 1;
         }
+        .fn-bridge-dismiss::after { font-size: 14px; opacity: 0.8; margin: 0; }
     }
 </style>
 
