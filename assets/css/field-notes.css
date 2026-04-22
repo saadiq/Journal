@@ -13,9 +13,9 @@
     --muted: #737370;
     --rule: #dedcd6;
     --rule-faint: #e8e6e0;
-    --accent: #8b5e16;
-    --accent-bright: #b8831e;
-    --accent-soft: rgba(139, 94, 22, 0.06);
+    --accent: #a47018;
+    --accent-bright: #d4a843;
+    --accent-soft: rgba(164, 112, 24, 0.06);
     --ok: #2d8040;
 
     /* typography — fonts loaded via google fonts in default.hbs */
