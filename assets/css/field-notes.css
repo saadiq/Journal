@@ -172,6 +172,23 @@ body::before {
     /* collapse to just `~/field-notes` — parent-site prefix is available via the link back home */
     .brand-host,
     .brand-sep { display: none; }
+
+    /* …and since the inline parent-site link is gone, surface it inside
+       the hamburger menu instead so it's still one tap away. */
+    .gh-head-menu .gh-head-parent-link { display: block; }
+}
+
+/* parent-site link lives inside the nav as a fallback for narrow viewports
+   where the brand-row `saadiq.xyz` link is hidden — off by default,
+   revealed at ≤520px (see above). */
+.gh-head-parent-link { display: none; }
+
+.gh-head-menu .gh-head-parent-link::before {
+    content: "cd";
+    color: var(--accent);
+    font-weight: 600;
+    opacity: 1;
+    margin-right: 6px;
 }
 
 /* brand "terminal prompt" logo */
