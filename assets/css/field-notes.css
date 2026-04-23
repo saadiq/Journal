@@ -1084,15 +1084,15 @@ body::before {
 }
 
 /* post header: single unified hero block at one column width —
-   meta, title, excerpt, byline, share-bar, and cover image all share
-   the same width and left edge, forming one cohesive hero */
+   meta, title, excerpt, cover image, byline, share-bar all share
+   the same width and left edge, forming one cohesive hero. no rule
+   under the share bar — the share bar itself is the visual terminator. */
 .gh-article > .gh-article-header {
     display: block;
     grid-template-columns: none;
     max-width: var(--fn-hero, 1100px);
-    margin: 0 auto 56px;
-    padding: 0 24px 40px;
-    border-bottom: 1px solid var(--rule);
+    margin: 0 auto 20px;
+    padding: 0 24px;
     animation: fn-rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
@@ -1124,7 +1124,7 @@ body::before {
 }
 
 @media (max-width: 640px) {
-    .gh-article > .gh-article-header { padding: 0 16px 32px; }
+    .gh-article > .gh-article-header { padding: 0 16px; }
     /* break the cover image out of the hero padding so it renders edge-to-edge;
        banner-aspect covers need the extra width to have any presence on phones */
     .gh-article-image {
@@ -2052,7 +2052,7 @@ body::before {
 @media (max-width: 780px) {
     .gh-latest { padding: 56px 0 48px; }
     .gh-article-header,
-    .gh-article > .gh-article-header { margin-bottom: 40px; }
+    .gh-article > .gh-article-header { margin-bottom: 16px; }
 }
 
 /* ── mobile header + burger overlay ──
