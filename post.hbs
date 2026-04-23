@@ -31,14 +31,11 @@
                 <p class="gh-article-excerpt">{{custom_excerpt}}</p>
             {{/if}}
 
-            <div class="gh-article-byline">
-                <span class="gh-article-byline-avatar" aria-hidden="true"></span>
-                <span>by <strong>{{authors}}</strong></span>
-            </div>
+            {{> "feature-image"}}
+
+            {{> "byline"}}
 
             {{> "share-bar" variant="top"}}
-
-            {{> "feature-image"}}
         </header>
 
         <div class="gh-content gh-canvas">

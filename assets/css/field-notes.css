@@ -553,7 +553,6 @@ body::before {
     overflow: hidden;
     border: 1px solid var(--rule);
     background: var(--bg-2);
-    order: 2;
 }
 
 .gh-latest-image img {
@@ -565,7 +564,18 @@ body::before {
 
 .gh-latest .gh-card-link:hover .gh-latest-image img { transform: scale(1.02); }
 
-.gh-latest-body { order: 1; min-width: 0; }
+.gh-latest-body { min-width: 0; }
+
+.gh-latest .gh-article-byline {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.gh-latest .gh-article-byline strong {
+    font-weight: 500;
+    color: var(--text-2);
+}
 
 @media (max-width: 900px) {
     .gh-latest.has-feature .gh-card-link { gap: 16px; }
