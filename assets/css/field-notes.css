@@ -183,13 +183,9 @@ body::before {
    revealed at ≤520px (see above). */
 .gh-head-parent-link { display: none; }
 
-.gh-head-menu .gh-head-parent-link::before {
-    content: "cd";
-    color: var(--accent);
-    font-weight: 600;
-    opacity: 1;
-    margin-right: 6px;
-}
+/* no "./" prefix here — this is a link off to the parent site,
+   not a nav item within this site */
+.gh-head-menu .gh-head-parent-link::before { content: none; }
 
 /* brand "terminal prompt" logo */
 .gh-head-brand,
