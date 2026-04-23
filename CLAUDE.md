@@ -55,6 +55,27 @@ This repo is a fork of `TryGhost/Journal`. Stay close to upstream — merge, don
 - To pull upstream changes: `git checkout dark-theme && git merge origin/main`
 - Expect conflicts only in `assets/built/screen.css{,.map}` — resolve with `git checkout --theirs`, then `bunx gulp build` to regenerate from merged source
 
+## Local preview
+
+`bun run dev` only watches/builds CSS + JS — it does not render templates. To see the theme with real Ghost rendering (post bodies, bylines, feature images, the hamburger overlay), run a local Ghost in Docker via `scripts/preview-ghost.sh`:
+
+```bash
+./scripts/preview-ghost.sh up             # start/restart at http://localhost:2368
+./scripts/preview-ghost.sh sync-theme     # re-stage after editing + bun run build
+./scripts/preview-ghost.sh sync-images    # pull prod content/images/ down (~476MB, one-time)
+./scripts/preview-ghost.sh down           # stop container (DB/images/theme stay on disk)
+./scripts/preview-ghost.sh reset          # nuke container + local DB
+```
+
+First `up` seeds an admin (`preview@example.com` / `PreviewPass1234`) and activates the `journal-field-notes` theme via Ghost's admin API. The device-verification gate is disabled so login works without SMTP. Content (SQLite DB), images, and the staged theme all live under `/tmp/journal-*` bind-mounts so container recreation preserves them.
+
+**Gotchas:**
+
+- **Never bind-mount the repo dir directly.** Ghost's entrypoint `chown -R`s the theme path at startup; our `.git/` objects (owned by the host user) make it exit 1. The script rsyncs into `/tmp/journal-theme-preview` first, excluding `.git`, `node_modules`, `dist`, and the agent dotdirs.
+- **Ghost's default SQLite path is version-scoped** (`versions/5.x.x/content/data/ghost-dev.db`), not `content/data/ghost.db` under the configured `contentPath`. The script sets `database__connection__filename` explicitly so the DB lands in the bind-mounted dir and survives `docker rm -f`.
+- **Content imports require a separate step.** Prod uses MySQL and posts contain member PII, so the script doesn't pull the DB. If you need prod posts in the preview, use Ghost Admin → Settings → Labs → Import content with a JSON export you've vetted locally.
+- **After editing templates or running `bunx gulp build`**, run `sync-theme` (or just `up` again). Handlebars partials are re-read per request but the staged mount only reflects what's been rsync'd.
+
 ## Deploy
 
 Theme is deployed to `/var/www/ghost/content/themes/journal-field-notes` on the shared droplet (`167.71.169.225`). The directory is **not a git repo on the server** — deploys are file sync. The active theme in Ghost Admin is `journal-field-notes` (`package.json` name, v2.0.0+). The old `journal-dark` directory may still exist on disk as a fallback — leave it unless explicitly asked to remove it.
@@ -76,6 +97,7 @@ rsync -av --partial --rsync-path='sudo rsync' \
   --exclude=node_modules --exclude=dist --exclude=.git \
   --exclude=.DS_Store --exclude=.superpowers --exclude=.claude \
   --exclude=CLAUDE.md --exclude=.gitignore --exclude=yarn-error.log \
+  --exclude=scripts \
   ~/dev/journal/ saadiq@167.71.169.225:/var/www/ghost/content/themes/journal-field-notes/
 
 # 3. Fix ownership (rsync ran as root)
