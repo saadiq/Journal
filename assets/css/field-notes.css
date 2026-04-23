@@ -370,11 +370,10 @@ body::before {
     color: var(--bg);
 }
 
-/* burger (mobile) */
-.gh-burger-box,
-.gh-burger-inner,
-.gh-burger-inner::before,
-.gh-burger-inner::after {
+/* burger (mobile) — shared theme renders the bars as .gh-burger::before/::after
+   pseudo-elements directly on the button, not as nested .gh-burger-inner nodes. */
+.gh-burger::before,
+.gh-burger::after {
     background-color: var(--text);
 }
 
@@ -2028,11 +2027,50 @@ body::before {
 }
 
 @media (max-width: 780px) {
-    .gh-head-inner { grid-template-columns: auto auto; }
-    .gh-head-menu { display: none; }
     .gh-latest { padding: 56px 0 48px; }
     .gh-article-header,
     .gh-article > .gh-article-header { margin-bottom: 40px; }
+}
+
+/* ── mobile header + burger overlay ──
+   At ≤767px the shared Ghost theme swaps the inline nav for a full-screen
+   overlay toggled by `.is-head-open` on <body>. We let that mechanism do its
+   job (never `display: none` the menu), just retheme it for field-notes and
+   unpin our header-height overrides so the overlay can go full-height. */
+@media (max-width: 767px) {
+    /* stack the three header areas (brand → menu → actions) in one column.
+       source order handles layout; drop the 3-column template-areas. */
+    #gh-head .gh-head-inner {
+        grid-template-columns: 1fr;
+        grid-template-areas: none;
+        gap: 32px;
+    }
+
+    /* when the overlay is open, let the shared rules take the header
+       full-height and full-bleed — our `height: auto` override at
+       #gh-head.gh-head would otherwise tie on specificity and win by order. */
+    .is-head-open#gh-head.gh-head {
+        height: 100%;
+        padding: 14px 0 0;
+    }
+
+    /* paint the overlay + sticky actions panel with the theme bg instead of white */
+    .is-head-open:not(.is-head-brand):not(.is-head-dark):not(.is-head-transparent) #gh-head,
+    .is-head-open #gh-head .gh-head-actions {
+        background-color: var(--bg);
+    }
+
+    /* keep nav links in the mono voice when the overlay blows them up */
+    .is-head-open #gh-head .gh-head-menu a {
+        font-family: var(--font-mono);
+        font-size: 18px;
+        font-weight: 500;
+        padding: 8px 12px;
+    }
+
+    /* hide the duplicate search button inside the stacked nav on mobile —
+       we already expose one in the brand row next to the burger */
+    #gh-head .gh-head-menu .gh-search { display: none; }
 }
 
 @media (max-width: 640px) {
