@@ -13,7 +13,14 @@
     {{ghost_head}}
 </head>
 
-<body class="{{body_class}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}">
+{{!-- has-serif-title is hardcoded, not driven by @custom.title_font. Ghost 6
+     replaced this theme's title_font/body_font dropdowns with its own
+     Typography picker, so the custom setting is stuck at its default and
+     unreachable in admin. Instrument Serif is the display face on
+     saadiq.xyz; matching it here is what makes /newsletter read as the same
+     brand. Ghost's picker has 21 fonts and Instrument Serif isn't one of
+     them, so this can only be set in the theme. --}}
+<body class="{{body_class}} is-head-{{#match @custom.navigation_layout "Logo on the left"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}} has-serif-title{{#match @custom.body_font "=" "Elegant serif"}} has-serif-body{{/match}}">
 <div class="gh-site">
 
     <header id="gh-head" class="gh-head gh-outer">
