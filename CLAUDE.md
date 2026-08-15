@@ -39,12 +39,21 @@ Both generate source maps. The `assets/built/` directory contains compiled outpu
 
 ## Theme Customization
 
-Three custom settings in `package.json` under `config.custom`, configurable via Ghost Admin:
+Three custom settings in `package.json` under `config.custom`, consumed in `default.hbs` to toggle CSS classes:
 
 - `navigation_layout` — "Logo on the left", "Logo in the middle", "Stacked" (default)
-- `title_font` / `body_font` — "Modern sans-serif" (Inter) or "Elegant serif" (Lora)
+- `body_font` — "Modern sans-serif" (Inter) or "Elegant serif" (Instrument Serif)
+- `newsletter_name` — free text
 
-These are consumed in `default.hbs` via `{{@custom.navigation_layout}}` to toggle CSS classes.
+### Ghost 6 overrides theme font settings
+
+**Don't add a `title_font` custom setting back.** Ghost 6 ships its own Typography picker (Settings → Design & branding → Customize) that *supersedes* a theme's `title_font`/`body_font` custom settings — they stop rendering in admin and sit stuck on their declared default, silently. There was a `title_font` select here; it went unreachable that way, which is why the theme's tuned serif-title mode appeared dead.
+
+Ghost's picker offers 21 faces (`@tryghost/custom-fonts`: Cardo, Chakra Petch, Old Standard TT, Libre Baskerville, Rufina, Space Grotesk, Tenor Sans, plus the body list). **Instrument Serif is not one of them**, so the display face can only be set in the theme. `has-serif-title` is therefore hardcoded on `<body>` — see the comment there. That class drives 10 rules that swap `var(--font-serif)` in at weight 400 with per-context letter-spacing.
+
+Keeping it matters: Instrument Serif is the display face on saadiq.xyz, and matching it is what makes `/newsletter` read as the same brand. See the "Related repo" section of `~/dev/saadiq.xyz/CLAUDE.md` for what the two properties do and don't share.
+
+If you remove a custom setting, also delete it from `package.json` — gscan errors on a setting declared but unused.
 
 ## Upstream
 
