@@ -10,6 +10,9 @@
         <a class="gh-share-btn" data-share-bluesky href="https://bsky.app/intent/compose?text={{encode title}}%20{{encode (url absolute="true")}}" target="_blank" rel="noopener" aria-label="Share on Bluesky">
             {{> "icons/bluesky"}}<span>bluesky</span>
         </a>
+        <a class="gh-share-btn" data-share-threads href="https://www.threads.com/intent/post?text={{encode title}}%20{{encode (url absolute="true")}}" target="_blank" rel="noopener" aria-label="Share on Threads">
+            {{> "icons/threads"}}<span>threads</span>
+        </a>
         <a class="gh-share-btn" data-share-email href="mailto:?subject={{encode title}}&body={{encode (url absolute="true")}}" aria-label="Share via email">
             {{> "icons/email"}}<span>email</span>
         </a>
